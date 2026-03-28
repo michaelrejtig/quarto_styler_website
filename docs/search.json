@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Quarto Styler",
+    "section": "",
+    "text": "A Quarto website that leverages Observable JS (OJS) for real-time simulation of styling."
+  },
+  {
+    "objectID": "index.html#summarytools-table-styler",
+    "href": "index.html#summarytools-table-styler",
+    "title": "Quarto Styler",
+    "section": "summarytools table styler",
+    "text": "summarytools table styler\nGenerate CSS for for your table!\n\nUse the inputs to adjust the CSS styling\n\nAutomatically updates and formats the CSS to be copied\n\nCopy CSS in the “Copy” tab\n\nCopy all css to clipboard using the button or\nhighlight and copy desired css below the button\n\n\nThis tool may work for other summarytools table outputs, but has only been tested with `dfSummary()."
+  }
+]

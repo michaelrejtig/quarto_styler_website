@@ -1,0 +1,41 @@
+/* css styles */
+
+.btn.btn-quarto,
+div.cell-output-display .btn-quarto {
+    color: #e9ecef;
+    background-color: #343a40;
+    border-color: #495057;
+
+    --bs-btn-color: #e9ecef;
+    --bs-btn-bg: #343a40;
+    --bs-btn-border-color: #495057;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: #495057;
+    --bs-btn-hover-border-color: #6c757d;
+    --bs-btn-focus-shadow-rgb: 108, 117, 125;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: #1a1d20;
+    --bs-btn-active-border-color: #343a40;
+    --bs-btn-active-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    --bs-btn-disabled-color: #6c757d;
+    --bs-btn-disabled-bg: #343a40;
+    --bs-btn-disabled-border-color: #343a40;
+    transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    border-radius: 6px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.btn.btn-quarto:hover,
+div.cell-output-display .btn-quarto:hover {
+    color: #ffffff;
+    background-color: #495057;
+    border-color: #6c757d;
+}
+
+.btn.btn-quarto:active,
+div.cell-output-display .btn-quarto:active {
+    color: #ffffff;
+    background-color: #1a1d20;
+    border-color: #343a40;
+}
