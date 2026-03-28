@@ -1,0 +1,21 @@
+---
+title: "Quarto Styler"
+author: "Michael Rejtig"
+---
+
+A Quarto website that leverages Observable JS (OJS) for real-time simulation of styling.
+
+
+# Instructions
+
+## summarytools table styler
+
+Generate CSS for for your table!
+
+1. Use the inputs to adjust the CSS styling
+    i) Automatically updates and formats the CSS to be copied 
+2. Copy CSS in the "Copy" tab
+    i) Copy all css to clipboard using the button or
+    ii) highlight and copy desired css below the button
+
+This tool may work for other `summarytools` table outputs, but has only been tested with `dfSummary().

@@ -1,0 +1,328 @@
+---
+title: "summarytools styler"
+
+format:
+  html: 
+    toc: false
+    page-layout: custom
+execute:
+  echo: false
+  warning: false
+---
+
+<!-- ::::: {.panel-sidebar} -->
+::: {.panel-tabset}
+
+## General
+
+```{ojs inputs_table_layout}
+// html`<br><p><strong>Table layout</strong></p>`
+
+// Border
+viewof st_table_border = Inputs.form({
+  border_color: Inputs.color({
+    label: "Table border color",
+    value: "#000000"
+  }),
+  border_size: Inputs.range([0, 3], {
+    step: 0.1,
+    label: "Table border size (px)",
+    value: 1  
+  })
+})
+
+```
+
+## Header
+
+```{ojs inputs_table_header, cold-folde: true}
+// html`<br><p><strong>Table header</strong></p>`
+
+// Header
+viewof st_table_header = Inputs.form({
+  bg_color: Inputs.color({
+    label: "Table header background color",
+    value: "#021b97"
+  }),
+  font_color: Inputs.color({
+    label: "Table header text color",
+    value: "#f0f2ff"
+  }),
+  font_size: Inputs.range([0.5, 2], {
+    step: 0.1,
+    label: "Table header font size (em)",
+    value: 1  
+  })
+})
+
+```
+
+
+## Body
+::: {layout-ncol="2"}
+
+```{ojs inputs_table_body}
+// html`<br><p><strong>Table body</strong></p>`
+
+// Body
+viewof st_table_body = Inputs.form({
+  bg_color: Inputs.color({
+    label: "Table body background color",
+    value: "#ffffff"
+  }),
+  font_color: Inputs.color({
+    label: "Table body text color",
+    value: "#021b97"
+  }),
+  font_size: Inputs.range([0.5, 2], {
+    step: 0.1,
+    label: "Table body font size (em)",
+    value: 1  
+  })
+})
+
+```
+
+```{ojs}
+// html`<br><p><strong>Table body detailed</strong></p>`
+
+// Table body rows
+viewof st_table_body_odd_rows_bg_color = Inputs.color({
+    label: "Table odd row background color",
+    value: "#ffffff"
+})
+
+viewof st_table_body_even_rows_bg_color = Inputs.color({
+    label: "Table even row background color",
+    value: "#ffffff"
+})
+```
+
+:::
+
+## Inner tables/graphs
+
+::: {layout-ncol="2"}
+```{ojs inputs_table_small_body}
+// html`<br><p><strong>Inner tables</strong>(tables in columns)</p>`
+
+// Inner tables
+viewof st_table_inner_table = Inputs.form({
+  border_color: Inputs.color({
+    label: "Border color",
+    value: "#ffffff"
+  }),
+  border_size: Inputs.range([0, 3], {
+    step: 0.1,
+    label: "Border size (px)",
+    value: 1  
+  }),
+  margin: Inputs.range([0, 50], {
+    step: 0.5,
+    label: "Margin",
+    value: 0  
+  }),
+  text_align: Inputs.radio(["left", "center", "right"], {
+    label: "Align",
+    value: "right"
+  }),
+  odd_row_bg_color: Inputs.color({
+    label: "Odd row bg color",
+    value: "#ffffff"
+  }),
+  even_row_bg_color: Inputs.color({
+    label: "Even row bg color",
+    value: "#ffffff"
+  })
+})
+
+st_table_inner_table.text_align
+```
+
+```{ojs}
+// Inner plots (bar graphs) --> .st-table tbody td img.img-fluid{}
+viewof st_table_inner_graph = Inputs.form({
+  bg_color: Inputs.color({
+    label: "Graph bg color",
+    value: "#ffffff"
+  }),
+  border_radius: Inputs.range([0, 50], {
+    step: 0.5,
+    label: "Graph border radius",
+    value: 0  
+  }),
+  padding: Inputs.range([0, 50], {
+    step: 0.5,
+    label: "Graph padding",
+    value: 0  
+  }),
+  margin: Inputs.range([0, 50], {
+    step: 0.5,
+    label: "Graph margin",
+    value: 0  
+  })
+})
+```
+
+:::
+
+## Copy CSS
+
+```{ojs copy_css_button}
+//| echo: false
+import {Copier} from "@mbostock/copier"
+
+Copier("Copy CSS to clipboard", {value: cssText})
+```
+
+
+```{ojs print_cssText}
+//| echo: false
+// cssText
+html`<pre><code>${cssText}</code></pre>`
+
+```
+
+
+```{ojs inputs_to_css}
+//| echo: false
+
+// Generate CSS text
+cssText = `
+/* Table layout */
+.st-table {
+  border: ${st_table_border.border_size}px solid ${st_table_border.border_color};
+}
+
+/* Table header */
+.st-table thead th, .st-table tr.header th {
+  color: ${st_table_header.font_color};
+  background-color: ${st_table_header.bg_color};
+  font-size: ${st_table_header.font_size}em;
+}
+
+/* Table body */
+.st-table tbody td {
+  color: ${st_table_body.font_color};
+  background-color: ${st_table_body.bg_color} !important;
+  font-size: ${st_table_body.font_size}em;
+}
+
+/* Table body rows */
+
+/* Odd rows 
+.st-table tr:nth-child(odd) td {
+  background-color: ${st_table_body_odd_rows_bg_color} !important; 
+}*/
+
+/* Even rows 
+.st-table tr:nth-child(even) td {
+  background-color: ${st_table_body_even_rows_bg_color} !important; 
+}*/
+
+/* Outer table - odd rows */
+.st-table > tbody > tr:nth-child(odd) > td {
+  background-color: ${st_table_body_odd_rows_bg_color} !important;
+}
+
+/* Outer table - even rows */
+.st-table > tbody > tr:nth-child(even) > td {
+  background-color: ${st_table_body_even_rows_bg_color} !important;
+}
+
+/* Inner table - odd rows */
+.st-table tbody .table-sm > tbody > tr:nth-child(odd) > td {
+  background-color: ${st_table_inner_table.odd_row_bg_color} !important;
+}
+
+/* Inner table - even rows */
+.st-table tbody .table-sm > tbody > tr:nth-child(even) > td {
+  background-color: ${st_table_inner_table.even_row_bg_color} !important;
+}
+
+/* Inner tables */
+.st-table tbody .table-sm {
+  border-color: ${st_table_inner_table.border_color} !important;
+  border: ${st_table_inner_table.border_size}px solid #000000;
+  margin: ${st_table_inner_table.margin}px !important;
+  text-align: ${st_table_inner_table.text_align} !important;
+  /* border-collapse: collapse; */
+}
+
+/* Inner table graph */
+.st-table tbody td img.img-fluid {
+  background-color: ${st_table_inner_graph.bg_color} !important;
+  border-radius: ${st_table_inner_graph.border_radius}px !important;
+  padding: ${st_table_inner_graph.padding}px !important;
+  margin: ${st_table_inner_graph.margin}px !important;
+}
+`
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+```
+
+```{ojs generate_css}
+//| echo: false
+
+// DO NOT DELETE
+// Apply CSS from inputs to entire document
+html`<style>
+${cssText}
+</style>
+`
+```
+
+:::
+<!-- ::::: -->
+
+::: {.panel-fill}
+```{r setup}
+#| echo: false
+#| warning: false
+library(summarytools)
+library(data.table)
+```
+```{r create_fake_table_data}
+#| echo: false
+#| warning: false
+
+set.seed(123)
+
+data <- data.table(
+  group = factor(sample(c("A", "B", "C"), 20, replace = TRUE)),
+  gender = factor(sample(c("Male", "Female"), 20, replace = TRUE)),
+  age = sample(20:60, 20, replace = TRUE),
+  income = sample(30000:80000, 20, replace = TRUE)
+)
+
+# Insert missing values
+data[sample(.N, 2), age := NA]
+data[sample(.N, 2), income := NA]
+data[sample(.N, 1), group := NA]
+
+```
+
+```{r st_gloabls}
+#| echo: false
+#| warning: false
+
+# st_options(
+#     footnote = NA
+# )
+```
+
+```{r dfsummary}
+#| echo: false
+
+summary = dfSummary(
+    data,
+    na.col = TRUE
+  )
+
+print(
+    summary,
+    method = "render",
+  )
+```
+:::
+
